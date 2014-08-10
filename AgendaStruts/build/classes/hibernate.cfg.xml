@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- PARTE QUE INFORMA AO XML QUE O CONTEUDO É DE HIBERNATE -->
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD 3.0.dtd"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+	
+<!-- TAG de configuração do Hibernate -->
+<hibernate-configuration>
+
+	<!-- TAG de fábrica de Sessão do hibernate. É aqui onde informamos os dados 
+		do banco, as configurações da sessão e as classes Model do java que o Hibernate 
+		deverá considerar. -->
+	<session-factory>
+		<!-- PARTE MAIS IMPORTANTE - MUDA DE PROJETO PARA PROJETO -->
+		<!-- CONFIGURAÇÃO DA CONEXÃO COM O BANCO DE DADOS -->
+		
+		<!-- Driver do banco de dados utilizado. Esta dentro da biblioteca usada. -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		
+		<!-- URL do Banco, ou seja, seu caminho de acesso-->
+		<property name="connection.url">jdbc:mysql://localhost/turma_3_agenda_hibernate</property>
+
+		<!-- Usuario e senha do banco acima informado. -->
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
+		
+		<!-- Linguagem usada nas Queries. -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		
+		<!-- FIM DA PARTE QUE MUDA DE PROJETO PARA PROJETO -->
+		
+		<!-- Impressão da SQL na Saida padrão -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		
+		<!-- Configuração de validação do Banco de Dados na execução do sistema -->
+		<!-- É aqui que se informa se o Hibernate criará todas as tabelas automaticamente -->
+		<!-- <property name="hbm2ddl.auto">drop-create</property> --><!-- Apaga e cria o banco com base nas annotations cada vez que executa o BD -->
+		<!-- <property name="hbm2ddl.auto">create</property> --><!-- Cria a estrutura do banco de dados com base nos Models(POs) -->
+		<property name="hbm2ddl.auto">update</property><!-- Apenas atualiza a estrutura. Obs: Usado quando em Desenvolvimento-->
+		<!-- <property name="hbm2ddl.auto">validate</property> --><!-- Apenas valida a estrutura. Obs: Usado quando em Produção-->
+		
+		<!-- PARTE MAIS IMPORTANTE - MUDA DE PROJETO PARA PROJETO -->
+		<!-- PARA CADA NOVA CLASSE MODEL(PO) CRIADA DEVE INFORMA-LA AQUI -->
+		<mapping class="br.com.src.agendastruts.agenda.abstractpo.AbstractPO"/>
+		<mapping class="br.com.src.agendastruts.agenda.contato.model.ContatoPO"/>
+
+	</session-factory>
+
+</hibernate-configuration>
